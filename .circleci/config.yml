@@ -17,7 +17,6 @@ jobs:
       - checkout
 
       - run: docker run --rm -v $(pwd):/src -w /src hysnsec/bundle-audit check --format json --output bundle-audit-output.json
-        when: on_fail
 
       - store_artifacts:
           path: bundle-audit-output.json
