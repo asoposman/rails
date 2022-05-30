@@ -17,7 +17,7 @@ jobs:
       - checkout
 
       - run:
-          command:  |
+          command: |
             gem install chelsea
             chelsea -f Gemfile.lock -t json | tail -n1 > chelsea-output.json      # tail -n1 to remove chelsea banner
           when: on_fail
