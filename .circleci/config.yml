@@ -11,6 +11,23 @@ jobs:
       - checkout
       - run: echo "This is a test step"
 
+  chelsea:
+    machine: true
+    steps:
+      - checkout
+
+      - run:
+          command:  |
+            gem install chelsea
+            chelsea -f Gemfile.lock -t json | tail -n1 > chelsea-output.json      # tail -n1 to remove chelsea banner
+          when: on_fail
+
+
+      - store_artifacts:
+          path: chelsea-output.json
+          destination: chelsea-artifact
+          when: always
+
   bundler-audit:
     machine: true
     steps:
@@ -48,6 +65,9 @@ workflows:
       - test:
           requires:
             - build
+      - chelsea:
+          requires:
+            - test
       - bundler-audit:
           requires:
             - test 
