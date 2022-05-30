@@ -20,8 +20,6 @@ jobs:
           command: |
             gem install chelsea
             chelsea -f Gemfile.lock -t json | tail -n1 > chelsea-output.json      # tail -n1 to remove chelsea banner
-          when: on_fail
-
 
       - store_artifacts:
           path: chelsea-output.json
