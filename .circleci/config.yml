@@ -21,7 +21,7 @@ jobs:
           command: |
             gem install chelsea
             chelsea -f Gemfile.lock -t json | tail -n1 > chelsea-output.json      # tail -n1 to remove chelsea banner
-          when: always
+          when: on_fail
           
       - store_artifacts:
           path: chelsea-output.json
@@ -36,7 +36,7 @@ jobs:
       - run: 
           name: Run bundler-audit
           command: docker run --rm -v $(pwd):/src -w /src hysnsec/bundle-audit check --format json --output bundle-audit-output.json
-          when: always
+          when: on_fail
 
       - store_artifacts:
           path: bundle-audit-output.json
