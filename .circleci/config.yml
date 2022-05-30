@@ -17,10 +17,12 @@ jobs:
       - checkout
 
       - run:
+          name: Run chelsea
           command: |
             gem install chelsea
             chelsea -f Gemfile.lock -t json | tail -n1 > chelsea-output.json      # tail -n1 to remove chelsea banner
-
+          when: always
+          
       - store_artifacts:
           path: chelsea-output.json
           destination: chelsea-artifact
