@@ -64,11 +64,11 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6.6 # Not needed with a .ruby-version file
+          ruby-version: 2.6.5 # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - run: |
-          gem install chelsea
+          gem install chelsea -v 0.0.27
           chelsea -f Gemfile.lock -t json | tail -n1 > chelsea-output.json      # tail -n1 to remove chelsea banner
         continue-on-error: true
 
